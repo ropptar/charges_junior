@@ -1,4 +1,5 @@
 import os
+import numpy as np
 
 
 def find_file(folder_path: str, extension: str):
@@ -39,6 +40,9 @@ def read_cih(folder_path: str):
         raise ValueError(f"CIH parse failed: {cih_path}")
     return h, w, t
 
-def load_raw_image(path:str,height:int,width:int):
+
+def load_raw_image(path: str, height: int, width: int):
     """формирует nparray из фотографии в указанном пути"""
-    return np.fromfile(path, dtype=np.uint16).reshape(height, width, 3).astype(np.float64)
+    return (
+        np.fromfile(path, dtype=np.uint16).reshape(height, width, 3).astype(np.float64)
+    )

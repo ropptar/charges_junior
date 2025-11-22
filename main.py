@@ -20,7 +20,7 @@ def process_raw_folder(raw_folder_path: str, count: int):
 
     # Чтение CIH
     try:
-        heigth, width, exposure = files.read_cih(raw_folder_path)
+        height, width, exposure = files.read_cih(raw_folder_path)
     except Exception as e:
         print(f"Error reading CIH in {raw_folder_path}: {str(e)}")
         return
@@ -30,7 +30,7 @@ def process_raw_folder(raw_folder_path: str, count: int):
     raw_files = np.array(
         [files.load_raw_image(raw_path, height, width) for raw_path in raw_paths]
     )
-    indices = np.array(DARK_CONFIG[count])
+    indices = np.array(config.DARK_CONFIG[count])
 
     mask = np.ones(len(raw_files), dtype=bool)
     mask[indices] = False
